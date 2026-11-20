@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-learning-central-india"
+		},
+		"LS_AzureSQL_password": {
+			"value": ""
+		},
+		"LS_ADLS_properties_typeProperties_url": {
+			"value": "https://demoadlsacccentralindia.dfs.core.windows.net/"
+		},
+		"LS_AzureSQL_properties_typeProperties_server": {
+			"value": "sql-server-demo-central-india.database.windows.net"
+		},
+		"LS_AzureSQL_properties_typeProperties_database": {
+			"value": "sql-database-demo"
+		},
+		"LS_AzureSQL_properties_typeProperties_userName": {
+			"value": "mysqlserver"
+		},
+		"TGR_EVENT_properties_PL_File_Event_parameters_file_name": {
+			"value": "@triggerBody().fileName"
+		},
+		"TGR_EVENT_properties_typeProperties_scope": {
+			"value": "/subscriptions/d840f11c-7300-4be7-a5c5-f31be09fb998/resourceGroups/rg-adf-central-india/providers/Microsoft.Storage/storageAccounts/demoadlsacccentralindia"
+		},
+		"TR_Tumbling_Window_Orders_properties_pipeline_parameters_window_start": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"TR_Tumbling_Window_Orders_properties_pipeline_parameters_window_end": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
