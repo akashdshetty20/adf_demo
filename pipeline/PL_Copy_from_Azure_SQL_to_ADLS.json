@@ -76,6 +76,7 @@
 			},
 			{
 				"name": "Read Watermark",
+				"description": "Read watermark from azure sql table.",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
