@@ -1,0 +1,28 @@
+{
+	"name": "TGR_EVENT",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_File_Event",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"file_name": "@triggerBody().fileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/demo-container/blobs/source/",
+			"blobPathEndsWith": ".txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/d840f11c-7300-4be7-a5c5-f31be09fb998/resourceGroups/rg-adf-central-india/providers/Microsoft.Storage/storageAccounts/demoadlsacccentralindia",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

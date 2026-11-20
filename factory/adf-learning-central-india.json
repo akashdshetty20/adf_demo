@@ -1,0 +1,22 @@
+{
+	"name": "adf-learning-central-india",
+	"properties": {
+		"globalParameters": {
+			"email_recepient": {
+				"type": "string",
+				"value": "mypracticemsacc26@outlook.com"
+			}
+		},
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true,
+			"isExplicitlySet": false
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5ea9827c-ba9c-442d-9e04-9b213bb86a3c",
+		"tenantId": "8d62735d-04c6-493d-9ea1-ad80059523b2"
+	}
+}

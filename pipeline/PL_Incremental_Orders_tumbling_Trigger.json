@@ -1,0 +1,82 @@
+{
+	"name": "PL_Incremental_Orders_tumbling_Trigger",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT OrderID, CustomerName, Amount, CreatedDate\nFROM dbo.Orders\nWHERE CreatedDate >= '@{pipeline().parameters.window_start}'\n  AND CreatedDate < '@{pipeline().parameters.window_end}'\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Azure_SQL_Trigger",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS_CSV_trigger",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_name": {
+								"value": "@concat('orders_', formatDateTime(pipeline().parameters.window_start, 'yyyyMMdd_HHmm'), '.csv')\n",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"window_start": {
+				"type": "string",
+				"defaultValue": "2026-11-20T00:00:00Z"
+			},
+			"window_end": {
+				"type": "string",
+				"defaultValue": "2026-11-20T01:00:00Z"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-11-20T09:59:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
